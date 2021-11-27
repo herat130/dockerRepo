@@ -1,0 +1,19 @@
+# command
+# docker-compose build
+# docker-compose  run app
+
+# can have multiple service for this case it is just one service ie: reactApp
+version: "3.3"
+services:
+  app:
+    build:
+      # context is describe where the Dockerfile located
+      context: .
+    volumes:
+      # map working directory to container for sync option
+      - .:/my-app
+    ports:
+      - 3000:3000
+    image: app:reactApp
+    container_name: react_container
+    command: npm start
