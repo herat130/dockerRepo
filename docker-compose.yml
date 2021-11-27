@@ -1,6 +1,7 @@
 # command
 # docker-compose build
-# docker-compose  run app
+# docker-compose  run app OR
+# docker-compose up
 
 # can have multiple service for this case it is just one service ie: reactApp
 version: "3.3"
