@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-react-app-depl
+spec:
+  selector:
+    matchLabels:
+      app: react-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: react-app
+    spec:
+      containers:
+        - name: react-app
+          image: heratdhruv/my-react-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-react-app-serv
+spec:
+  type: NodePort
+  selector:
+    app: react-app
+  ports:
+    - name: my-app
+      port: 3000
+      targetPort: 3000
+# kubectl apply -f my-react-app-depl.yml
+# DEBER08606:infra herat.dhruv$ kubectl get pods
+# NAME                                 READY   STATUS    RESTARTS   AGE
+# my-react-app-depl-6d45d8c5d8-dpbcw   1/1     Running   0          33s
+# DEBER08606:infra herat.dhruv$ kubectl get service
+# NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+# kubernetes          ClusterIP   10.96.0.1        <none>        443/TCP          3h5m
+# my-react-app-serv   NodePort    10.111.196.143   <none>        3000:31986/TCP   3m18s
+# DEBER08606:infra herat.dhruv$ kubectl get nodes
+# NAME             STATUS   ROLES                  AGE    VERSION
+# docker-desktop   Ready    control-plane,master   3h5m   v1.21.5
+# local access: http://localhost:31986

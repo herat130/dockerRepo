@@ -1,17 +1,7 @@
-#  build docker image of an application
-
-# command
-#  docker build --tag reactApp .
-
+# docker build -t heratdhruv/my-react-app .
 FROM node:15.13-alpine
 WORKDIR /my-app
-ENV PATH="./node_modules/.bin:$PATH"
+COPY package.json .
+RUN npm install
 COPY . .
-RUN npm run build
-
-# when container starts it will execute below command
-# create / start container with below command and tagged image
-
-# command
-# docker run --publish 3000:3000 reactApp
-CMD ["npm", "start"]  
+CMD ["npm","start"]
